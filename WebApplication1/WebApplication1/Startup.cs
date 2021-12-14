@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Data;
+using WebApplication1.Helpers;
 
 namespace WebApplication1
 {
@@ -30,6 +31,8 @@ namespace WebApplication1
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddControllers(); 
             services.AddScoped<IUserRepository,UserRepository>();
+            services.AddScoped<JwtService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication1", Version = "v1" });

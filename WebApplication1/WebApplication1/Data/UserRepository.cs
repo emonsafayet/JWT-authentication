@@ -1,4 +1,5 @@
 ﻿using WebApplication1.Models;
+using System.Linq;
 
 namespace WebApplication1.Data
 {
@@ -16,5 +17,11 @@ namespace WebApplication1.Data
 
             return user;
         }
+
+        public User GetByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(x => x.Email == email);
+        }
+         
     }
 }
