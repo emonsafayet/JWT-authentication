@@ -28,8 +28,12 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            
             services.AddControllers(); 
+            
             services.AddScoped<IUserRepository,UserRepository>();
             services.AddScoped<JwtService>();
 
@@ -50,6 +54,13 @@ namespace WebApplication1
             }
 
             app.UseRouting();
+
+            app.UseCors(options =>options
+            .WithOrigins(new[] { "https://localhost:3000", "https://localhost:28800", "https://localhost:4200" })
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()
+            );
 
             app.UseAuthorization();
 
