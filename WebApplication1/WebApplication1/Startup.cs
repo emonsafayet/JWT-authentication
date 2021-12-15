@@ -56,7 +56,7 @@ namespace WebApplication1
             app.UseRouting();
 
             app.UseCors(options =>options
-            .WithOrigins(new[] { "https://localhost:3000", "https://localhost:28800", "https://localhost:4200" })
+            .WithOrigins(new[] { "http://localhost:3000", "http://localhost:28800", "http://localhost:4200" })
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
