@@ -65,6 +65,8 @@ namespace WebApplication1.Controllers
             {
                 var jwt = Request.Cookies["jwt"];
 
+                if (jwt == null) return null ;
+                
                 var token = _jwtService.Verify(jwt);
 
                 int userId = int.Parse(token.Issuer);

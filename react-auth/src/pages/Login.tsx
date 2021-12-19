@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import { Navigate  } from "react-router-dom"; 
 
-const Login =()=>{
+const Login =(props:{setName:(name : string)=>void})=>{
     const [email,setEmail] = useState('');
     const [password,setpassword] = useState('');
     const [navigate,setNavigate] = useState(false);
@@ -9,7 +9,7 @@ const Login =()=>{
     const submit=async (e:SyntheticEvent)=>{
         e.preventDefault();
 
-        await fetch('http://localhost:28800/api/login',{
+       const response=  await fetch('http://localhost:28800/api/login',{
             method:'POST',
             headers:{'Content-Type':'application/json'},
             credentials:"include",
@@ -18,7 +18,11 @@ const Login =()=>{
              password
             })
         }); 
+        const content = await response.json();
+
         setNavigate(true);
+        props.setName(content.name);
+        
     }
     if(navigate)
     {
